@@ -1,0 +1,19 @@
+
+<div *ngIf="rates$ | async as localRates; else loading">
+  <table>
+
+    <tr>
+      <th>Pair</th>
+      <th>Rate</th>
+    </tr>
+    <tr *ngFor="let rate of localRates">
+      <td>{{rate.symbol}}</td>
+      <td>{{rate.price}}</td>
+    </tr>
+
+  </table>
+</div>
+
+<ng-template #loading>
+  <p>Loading rates...</p>
+</ng-template>
