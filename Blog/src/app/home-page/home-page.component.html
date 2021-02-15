@@ -1,0 +1,18 @@
+
+
+<div
+  *ngIf="posts$ | async as localPosts; else loading"
+  class="posts">
+
+  <app-post
+  *ngFor="let post of localPosts"
+  [post] = "post"
+  >
+  </app-post>
+
+
+</div>
+
+<ng-template #loading>
+  <p class="text-center">Идет загрузка постов...</p>
+</ng-template>

@@ -1,0 +1,17 @@
+
+<button (click)="currentStateBox()">Animate</button>
+<button (click)="stateBox = 'special'">Special</button>
+<button (click)="stateVoid =! stateVoid">Void or not void</button>
+
+<div class="wrap">
+
+  <div
+    *ngIf="stateVoid"
+    [@box]="stateBox"
+    (@box.start) = "getEchoStart($event)"
+    (@box.done) = "getEchoDone($event)"
+    class="box">
+    <h4>{{stateBox | uppercase}}</h4>
+  </div>
+
+</div>

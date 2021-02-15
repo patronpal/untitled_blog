@@ -1,0 +1,29 @@
+<div class="Container">
+  <h1>Angular Components</h1>
+
+  <app-post-form
+    (OnAdd)="updatePosts($event)"
+  ></app-post-form>
+
+  <hr />
+
+  <app-post
+    *ngFor="let somePost of posts"
+    [myPost]="somePost"
+    (forDeletEvent)="takeAndDeletPostById($event)"
+  >
+    //передача параметра в компоненту (что бы логика работала - нужно воспользоваться ng-content в post.html, где задается расположение контента который описан ниже здесь!)
+    <hr>
+    //а если нужно обратиться к контенту из post компоненты, то надо задать имя через # и см.post.ts (@ContentChild)
+    <hr>
+    <div #info>
+      <small *ngIf="somePost.text.length > 10 ; else shortPost">пост длинный</small>
+      <ng-template #shortPost>
+        <small>Пост короткий</small>
+      </ng-template>
+    </div>
+  </app-post>
+
+
+
+</div>

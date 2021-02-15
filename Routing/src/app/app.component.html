@@ -1,0 +1,32 @@
+<nav class="navbar">
+  <h1>
+    <a [routerLink]="['/']">Angular Routing</a>
+  </h1>
+  class="active" - можно заменить на работу в автомтическом режиме через routerLinkActive и класс будет авто применятся здесь
+  <ul>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <a [routerLink]="['/']">Home</a>
+    </li>
+<!--    <li><a href="/posts">Posts</a></li>-->
+    <li routerLinkActive="active">
+      <a routerLink="/posts">Posts</a>
+    </li>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/about']">About</a>
+    </li>
+
+    <li><button class="btn" (click)="auth.logIn()">Login</button></li>
+    <li><button class="btn" (click)="auth.logOut()">Logout</button></li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div class="card">
+
+    <router-outlet></router-outlet>
+
+  </div>
+</div>
+
+
+

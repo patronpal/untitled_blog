@@ -1,0 +1,13 @@
+<h1>Services</h1>
+
+<div class="card">
+  <h2>appCounter: {{appCounter1.counter1}}</h2>
+  <button class="btn" (click)="appCounter1.counterUp()">counter1 +</button>
+  <button class="btn" (click)="appCounter1.counterDown()">counter1 -</button>
+  <hr />
+  <h2>appCounter local: {{appLocalCounter.counter1}}</h2>
+  <button class="btn" (click)="appLocalCounter.counterUp()">counter1 local +</button>
+  <button class="btn" (click)="appLocalCounter.counterDown()">counter1 local -</button>
+</div>
+
+<app-for-test-service></app-for-test-service>

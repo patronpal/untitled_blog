@@ -1,0 +1,104 @@
+<h2>Интерполяция - динамический вывод данных в шаблон.</h2>
+<p>{{ titleInterpolyacia }}</p>
+<p>{{ 100+5 }}</p>
+<p>{{ numberInterpolyacia }}</p>
+
+<hr>
+<h2>Binding - баендинг. Односторонняя передача данных из HTML шаблона - > TS</h2>
+<img [src]=imgToHTML> <a>можно через интерполяцию 'img src=Интерполяция переменной' выводить картинку, НО лучше через binding - [src]=переменная</a>
+
+<hr>
+<h2>Binding event. Односторонняя передача данных из TS - > шаблон HTML</h2>
+<input type="text"
+       (keyup.enter)="onInput($event)"
+       (blur)="onBlur(thisInput.value)"
+       #thisInput
+>
+<p><strong>{{inputValue}}</strong></p>
+<a>или через кнопку</a>
+<button (click)="onClick()">Click me!</button>
+<p><strong>{{inputValueOnButton}}</strong></p>
+
+<hr>
+<h2>Two way Bainding - В обе стороны баендинг</h2>
+//1. первый вариант, рабочий но херовый
+<input type="text" [value]="twoWaytitle1" (input)="twoWayOnInput1($event)">
+<p>{{twoWaytitle1}}</p>
+//2. второй вариант - по красоте. Надо добавить в app.module.ts - imports: FormsModule
+<input type="text" [(ngModel)]="twoWaytitle2">
+<p>{{twoWaytitle2}}</p>
+
+<hr>
+<h2>Директива <strong>ngStyle</strong>> - динамическое управление стялми различных элементов</h2>
+<div [ngStyle]="{
+  width: '100px',
+  height: '100px',
+  border: '5px solid #ccc',
+  borderRadius: '5px',
+  background: backGroundBoolean ? 'blue': 'red'
+}">
+</div>
+//у кнопки на метод click - террарная функция с инверсией переменной =)
+<button (click)="backGroundBoolean = !backGroundBoolean">Изменить цвет при нажатии</button>
+
+<hr>
+<h2>Директива <strong>ngClass</strong>> - динамическое управление классами различных элементов</h2>
+<a>1.используем ngClass</a>
+<button (click)="backGroundBooleanClass = !backGroundBooleanClass">Изменить class при нажатии</button>
+<p [ngClass]="{
+  blue: backGroundBooleanClass,
+  red: !backGroundBooleanClass
+}"
+>Изменяемый текс в зависимоти от класса</p>
+<a>2.используем binding классов</a>
+<button (click)="backGroundBooleanClass = !backGroundBooleanClass">Изменить класс через баендинг атрибута class</button>
+<p [class.blue]="backGroundBooleanClass"
+  [class.red]="!backGroundBooleanClass"
+>Изменяемый текст в зависимости от баендинга класса</p>
+
+<hr>
+<h2>ngIf & ngElse</h2>
+<a>отдельная работа <strong>If</strong></a>
+<button (click)="togleIf1 = !togleIf1">Изменить через If</button>
+<p *ngIf="togleIf1" class="blue">Какой-то текст, который удаляется или появляется от If</p>
+
+<a>работа <strong>If</strong> и <strong>else</strong></a>
+<button (click)="togleIf2 = !togleIf2">Изменить через If & else</button>
+<p *ngIf="togleIf2; else pRed" class="blue">Вставляемый параграф BLUE от условия if&else</p>
+<ng-template #pRed>
+  <p class="red">Вставляемый параграф RED от условия if&else</p>
+</ng-template>
+
+<hr>
+<h2><strong>ngSwitch - тоже что и if else но с переключением</strong></h2>
+<button (click)="togleSwitch = !togleSwitch">ngSwitch</button>
+<div [ngSwitch]="togleSwitch">
+  <p *ngSwitchCase="true" class="blue">Первый текст</p>
+  <p *ngSwitchCase="false" class="red">Второй текст</p>
+  <p *ngSwitchDefault>Default текст</p>
+</div>
+
+<hr>
+<h2>ngFor - цикл ng</h2>
+  <p>Работа с простым массивом</p>
+  <ul>
+    <li *ngFor="let n of arrNg1; let ngx = index">
+      индекс:{{ngx}}  значение массива<strong>{{n}}</strong>
+    </li>
+  </ul>
+  <p>Работа с массивом и вложенными объектами</p>
+  <ul> смотрим на обращение через наследование
+    <li *ngFor="let zpost of arrNg2">
+      Name: {{zpost.name}} <br> Old: {{zpost.old}}
+      <ul>показатели
+        <li *ngFor="let zpost2 of zpost.someObj">
+          {{zpost2.run5}} {{zpost2.run10}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+<hr>
+<h2>Pipes - минитрансформеры (работа с форматами отображения как пример)</h2>
+<p>переменная (дата):  <strong>{{now}}</strong></p>
+<p>gеременная (дата) с пайпами: date(формат даты) и uppercase(формат текста капсом):  <strong>{{now | date | uppercase}}</strong></p>
